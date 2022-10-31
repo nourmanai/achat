@@ -33,6 +33,18 @@ pipeline {
                 }
             }
         }
+     
+     
+         stage("publish to nexus") {
+            steps {
+                script {
+                configFileProvider([configFile(fileId: 'anis', variable: 'setting')]) {
+                    sh 'mvn  -B -DskipTests deploy -s $setting'
+
+}                }
+            }
+        }
+     
  }
    
 }

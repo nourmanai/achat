@@ -120,6 +120,11 @@
                 </plugins>
 
         </build>
-    
+    <distributionManagement>
+		<repository>
+			<id>anis</id>
+			<url>http://192.168.80.205:8081/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
 
 </project>

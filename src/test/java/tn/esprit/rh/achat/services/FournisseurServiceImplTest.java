@@ -3,41 +3,26 @@ package tn.esprit.rh.achat.services;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import tn.esprit.rh.achat.entities.CategorieFournisseur;
-import tn.esprit.rh.achat.entities.DetailFournisseur;
-import tn.esprit.rh.achat.entities.Facture;
+
 import tn.esprit.rh.achat.entities.Fournisseur;
-import tn.esprit.rh.achat.entities.SecteurActivite;
+
 import tn.esprit.rh.achat.repositories.DetailFournisseurRepository;
 import tn.esprit.rh.achat.repositories.FournisseurRepository;
 import tn.esprit.rh.achat.repositories.ProduitRepository;
 import tn.esprit.rh.achat.repositories.SecteurActiviteRepository;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
-import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;

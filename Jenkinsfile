@@ -10,14 +10,14 @@
         }
        stage('maven build'){
             steps{
-                sh 'mvn clean package'
+                sh 'mvn --version'
                 
             }
         }   
       stage('maven test'){
             steps{
                
-                                sh 'mvn clean package'
+                sh 'mvn --version'
 
             }
         }   

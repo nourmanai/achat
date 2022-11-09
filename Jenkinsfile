@@ -16,7 +16,8 @@
       stage('maven test'){
             steps{
                
-                
+                                sh 'mvn clean package'
+
             }
         }   
        

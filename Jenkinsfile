@@ -9,13 +9,13 @@
         }
        stage('maven build'){
             steps{
-                sh "mvn build"
+                sh 'mvn clean package'
                 
             }
         }   
       stage('maven test'){
             steps{
-                sh "mvn test"
+               
                 
             }
         }   

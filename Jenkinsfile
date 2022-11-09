@@ -1,16 +1,24 @@
   pipeline{
     agent any
     stages{
-       stage('Get git'){
+       stage('Git'){
             steps{
                 git 'https://github.com/nourmanai/achat.git'
-                sh '''
-            # Content omitted
-            git checkout chaima_branch
-            # Content omitted
-            '''
+                
             }
-        }    
+        }
+       stage('maven build'){
+            steps{
+                sh "mvn build"
+                
+            }
+        }   
+      stage('maven test'){
+            steps{
+                sh "mvn test"
+                
+            }
+        }   
        
        
     }

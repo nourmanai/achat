@@ -35,8 +35,7 @@
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-starter-validation</artifactId>
                 </dependency>
-                <!-- https://mvnrepository.com/artifact/junit/junit -->
-                <!-- https://mvnrepository.com/artifact/junit/junit -->
+            
 
 
 

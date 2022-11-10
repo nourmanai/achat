@@ -4,7 +4,7 @@
     stages{
        stage('Git'){
             steps{
-               git 'https://github.com/mhassini/avec-maven.git'
+               git 'https://github.com/nourmanai/achat.git'
                 
             }
         }

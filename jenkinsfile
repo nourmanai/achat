@@ -22,7 +22,7 @@ pipeline{
         
 
         
-          stage('MVN CLEAN INSTALL'){
+         /* stage('MVN CLEAN INSTALL'){
             steps {
                 sh 'mvn clean install '
             }
@@ -46,7 +46,7 @@ stage('show Date') {
      
         
 
-        /*
+        
          stage('Building our image') { 
             steps { 
                 script { 

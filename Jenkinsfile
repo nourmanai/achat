@@ -4,6 +4,14 @@ pipeline {
         maven 'maven'
     }
  stages {
+         stage("get code from git"){
+            steps{
+                script{
+                    checkout([$class: 'GitSCM', branches: [[name: '*/anis_branch']], extensions: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://github.com/nourmanai/achat.git']]])
+                }
+            }
+         }
+                
          stage("cleaning code") {
             steps {
                 script {
@@ -35,7 +43,7 @@ pipeline {
         }
      
      
-         stage("publish to nexus") {
+         /*stage("publish to nexus") {
             steps {
                 script {
                 configFileProvider([configFile(fileId: 'anis', variable: 'setting')]) {
@@ -43,7 +51,32 @@ pipeline {
 
 }                }
             }
+        }*/
+                 stage("Create Docker Image") {
+            steps {
+                script {
+                   sh 'docker build -t hajali98/spring:latest .'
+                }
+            }
         }
+        stage("pushing image to docker hub") { 
+             steps { 
+                 script { 
+                    withCredentials([usernamePassword(credentialsId: 'Docker_hub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                    sh "echo $PASS | docker login -u $USER --password-stdin"
+                    sh 'docker push hajali98/spring:latest'
+                        
+                    }
+                 } 
+             } 
+         }
+                  stage("Docker compose") {
+            steps {
+                script {
+                   sh 'docker compose up -d'
+                }
+            }
+         }
      
  }
    

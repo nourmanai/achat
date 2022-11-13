@@ -10,13 +10,13 @@
         }
        stage('maven test'){
             steps{
-                                bat 'c:/maven/mvn --version'
+                                bat 'c:/maven/bin/mvn --version'
 
             }
         }   
       stage('maven build'){
             steps{
-                               bat 'c:/maven/mvn clean verify'
+                               bat 'c:/maven/bin/mvn clean verify'
 
 
             }
@@ -24,7 +24,7 @@
       stage('Sonar') {
 //    def scannerHome = tool 'SonarScanner 4.0';
         steps{
-        bat "c:/maven/mvn sonar:sonar"
+        bat "c:/maven/bin/mvn sonar:sonar"
    
         }
         }

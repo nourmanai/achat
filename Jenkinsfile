@@ -32,6 +32,13 @@
         }
         }
        
-       
-    }
+      stage('Nexus') {
+//    def scannerHome = tool 'SonarScanner 4.0';
+        steps{
+        bat "c:/maven/bin/mvn -f clean package deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=0.0.2-SNAPSHOT -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://192.168.10.11:8081/repository/maven-snapshots/ -Dfile=target/tpAchatProject-0.0.2-SNAPSHOT.jar -Dnexus.login=admin -Dnexus.password=nexus
+  
+   
+        }
+        }
+        }
 }

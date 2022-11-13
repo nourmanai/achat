@@ -84,8 +84,15 @@ class TestFournisseur {
 	void TestRetrieveAll() {
 		
 		
-		fournisseurService.retrieveAllFournisseurs();
-		verify(fournisseurRepository).findAll();
+			when(fournisseurRepository.findAll()).thenReturn(Stream.of(
+                new Fournisseur( "code",  "libelle1", null, null,
+            			null, null),
+                new Fournisseur("code2",  "libelle2", null, null,
+            			null, null),
+                new Fournisseur("code3",  "libelle3", null, null,
+            			null, null))
+                .collect(Collectors.toList()));
+		assertEquals(3,fournisseurService.retrieveAllFournisseurs().size());
 		
 	}
 	
@@ -143,25 +150,18 @@ class TestFournisseur {
 	 @Test
 	 void UpdateFournisseurTest() {
 		 
-		    Fournisseur f=new Fournisseur();
-			DetailFournisseur df= new DetailFournisseur();
-			DetailFournisseur df2= new DetailFournisseur();
-
-			df.setAdresse("adresse");
-			df.setEmail("email");
-			df.setMatricule("matricule");
-			df.setDateDebutCollaboration(new Date());
-			//df.setFournisseur(f);
-			//detailFournisseurRepository.save(df);
-		
-			f.setCode("code");
-			f.setLibelle("libelle");
-			f.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
-			f.setDetailFournisseur(df2);
-			//fournisseurRepository.save(f);
+		     DetailFournisseur df= new DetailFournisseur( "email", null , "adresse", " matricule", null);
+	    	 detailFournisseurRepository.save(df);
+		    Fournisseur f=new Fournisseur("code",  "libelle1", null, null,null, df);
 			
-			fournisseurService.updateFournisseur(f);
-			verify(fournisseurRepository).save(f);	
+
+			Mockito.when(fournisseurRepository.save(Mockito.any(Fournisseur.class))).thenReturn(f);
+			DetailFournisseur df2=new DetailFournisseur( "email2",null , "adresse", " matricule", null);
+			f.setDetailFournisseur(df2);
+			Fournisseur exisitingOp= fournisseurService.updateFournisseur(f) ;
+			
+			assertNotNull(exisitingOp);
+			assertEquals("libelle2", f.getLibelle());
 		 
 		 
 	 }*/

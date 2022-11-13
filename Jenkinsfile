@@ -43,7 +43,7 @@ pipeline {
         }
      
      
-         /*stage("publish to nexus") {
+         stage("publish to nexus") {
             steps {
                 script {
                 configFileProvider([configFile(fileId: 'anis', variable: 'setting')]) {
@@ -51,7 +51,7 @@ pipeline {
 
 }                }
             }
-        }*/
+        }
                  stage("Create Docker Image") {
             steps {
                 script {

@@ -3,12 +3,9 @@ package tn.esprit.rh.achat;
 
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Date;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -39,15 +36,12 @@ public class TestFournisseur {
 	@Mock private DetailFournisseurRepository detailFournisseurRepository;
 
 	@Mock private SecteurActiviteRepository secteurActiviteRepository;
-	private SecteurActiviteServiceImpl SecteurActiviteService;
-	
-
 	@BeforeEach
 	public void setUp()
     {
         this.fournisseurService
             = new FournisseurServiceImpl(this.fournisseurRepository);
-        this.SecteurActiviteService = new SecteurActiviteServiceImpl(this.secteurActiviteRepository);
+        new SecteurActiviteServiceImpl(this.secteurActiviteRepository);
        
     }
 	

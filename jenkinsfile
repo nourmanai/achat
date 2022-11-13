@@ -14,7 +14,7 @@ pipeline{
             stage('Checkout GIT ') {
                 steps {
                     echo 'cheking Git hub Repo ...';
-                    git branch : 'master',
+                    git branch : 'yasmine',
                     url : 'https://github.com/nourmanai/achat'
                 }
             }

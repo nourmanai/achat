@@ -8,20 +8,20 @@
                 
             }
         }
-       stage('maven build'){
+       stage('maven test'){
             steps{
-                                sh 'mvn --version'
+                                bat 'c:/maven/mvn --version'
 
             }
         }   
-      stage('maven test'){
+      stage('maven build'){
             steps{
-                               sh 'mvn clean install -X'
+                               sh 'c:/maven/mvn clean verify'
 
 
             }
         }   
-      stage('SonarQube') {
+      stage('Sonar') {
 //    def scannerHome = tool 'SonarScanner 4.0';
         steps{
         sh "mvn sonar:sonar \

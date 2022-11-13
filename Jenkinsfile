@@ -24,7 +24,8 @@
       stage('Sonar') {
 //    def scannerHome = tool 'SonarScanner 4.0';
         steps{
-        bat "c:/maven/bin/mvn sonar:sonar"
+        bat "c:/maven/bin/mvn sonar:sonar \
+  -Dsonar.host.url=http://192.168.33.10:9000"
    
         }
         }

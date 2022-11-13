@@ -26,8 +26,8 @@
         steps{
         bat "c:/maven/bin/mvn sonar:sonar \
    -Dsonar.host.url=http://192.168.33.10:9000\
-   -Dsonar.login=jenkins\
-   -Dsonar.password=1fb78e3ccad79a49de0d233285afa05e7c7db80f"
+   -Dsonar.login=chaima\
+   -Dsonar.password=9b599438496c729da958e4e0a1f0191f96e09208"
    
         }
         }

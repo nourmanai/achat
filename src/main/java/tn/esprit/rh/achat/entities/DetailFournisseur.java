@@ -35,9 +35,7 @@ public class DetailFournisseur implements Serializable{
 	private Fournisseur fournisseur;
 	
 	
-	public DetailFournisseur() {
-		super();
-	}
+	
 	public DetailFournisseur(String email, Date dateDebutCollaboration, String adresse, String matricule,
 			Fournisseur fournisseur) {
 		super();

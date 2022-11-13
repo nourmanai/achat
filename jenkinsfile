@@ -32,11 +32,12 @@ pipeline{
         
           stage('MVN CLEAN INSTALL'){
             steps {
-                sh 'mvn clean install '
+                sh 'mvn clean install -DskipTests=true '
+
             }
         }
 
-        stage('Building our image') { 
+        /*stage('Building our image') { 
             steps { 
                 script { 
                     dockerImage = docker.build registry + ":$BUILD_NUMBER" 
@@ -67,7 +68,7 @@ pipeline{
 
         
         
-        /* stage ('JUnit / Mockito Test'){
+        stage ('JUnit / Mockito Test'){
             steps{
                 sh 'mvn test'
                 }

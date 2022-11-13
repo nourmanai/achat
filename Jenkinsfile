@@ -39,12 +39,12 @@ pipeline {
       }
     }
   
-   stage ('NEXUS DEPLOY') {
-       steps {
-       sh 'mvn deploy -DskipTests'
-        
-      }
-    }
+   stage('DeployInNexus') {
+            steps {
+            bat 'mvn clean package deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=1.0 -DgeneratePom=true-Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://localhost:8081/repository/maven-releases/ -Dfile=target/timesheet-1.0.jar'
+            }
+            
+        }
     
   
  }

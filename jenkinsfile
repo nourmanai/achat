@@ -26,14 +26,16 @@ pipeline{
             }
          
 
-         /*   stage('git clone') {
+         
+
+            stage('git clone') {
             steps {
-               git branch: 'master', 
-               url: 'https://github.com/Majdi-msallem/Devops.git'
+               git branch: 'yasmine', 
+               url: 'https://github.com/nourmanai/achat'
             }
         }
-*/
-        
+
+      
 
         
           stage('MVN CLEAN INSTALL'){
@@ -51,7 +53,7 @@ pipeline{
                 }
             }
         }
-        
+
 
 
   stage("Publish to Nexus Repository Manager") {

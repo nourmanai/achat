@@ -8,15 +8,17 @@
                 
             }
         }
-       stage('maven test'){
+       stage('maven compile'){
             steps{
-                                bat 'c:/maven/bin/mvn --version'
+                                bat 'c:/maven/bin/mvn clean'
+                                bat 'c:/maven/bin/mvn compile'
 
             }
         }   
       stage('maven build'){
             steps{
-                               bat 'c:/maven/bin/mvn clean verify'
+                               bat 'c:/maven/bin/mvn clean'
+                               bat 'c:/maven/bin/mvn package'
 
 
             }

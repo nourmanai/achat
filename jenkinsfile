@@ -62,7 +62,7 @@ pipeline{
 
 
 
-        /*stage('SonarQube analysis') {
+        stage('SonarQube analysis') {
 //    def scannerHome = tool 'SonarScanner 4.0';
         steps{
         withSonarQubeEnv('sonarqube-8.9.7') { 
@@ -97,12 +97,12 @@ pipeline{
 
 
 
-        stage('Cleaning up') { 
+        /*stage('Cleaning up') { 
             steps { 
                 sh "docker rmi $registry:$BUILD_NUMBER" 
             }
         }
-
+*/
         
         
         stage ('JUnit / Mockito Test'){
@@ -124,7 +124,7 @@ stage('show Date') {
      
         
 
-        
+        /*
          stage('Building our image') { 
             steps { 
                 script { 
@@ -132,15 +132,22 @@ stage('show Date') {
                 }
             } 
         }
-        */
+        
    
-       /*
+       
         stage('Cleaning up') { 
             steps { 
                 sh "docker rmi $registry:$BUILD_NUMBER" 
             }
         } */
 
+	 stage('Docker-compose') {
+            steps {
+                echo 'Running docker-compose...';
+                sh """ docker-compose up -d """;
+               sh """ docker-compose ps """;
+            }
+        }
        
 }
 

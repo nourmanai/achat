@@ -1,4 +1,4 @@
-version: "2"
+version: '3'
 
 services:
  mysqldb:
@@ -6,7 +6,7 @@ services:
    container_name: db
    restart: always
    environment:
-     - "MYSQL_DATABASE": "achatdb"
+     - MYSQL_DATABASE: achatdb
      - MYSQL_ALLOW_EMPTY_PASSWORD: yes
    ports:
       - "3306:3306"

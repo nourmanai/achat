@@ -30,7 +30,7 @@ public class TestFournisseurJunit {
 		public void testAddFournisseur(){
 		List<Fournisseur> fournisseurs = fournisseurService.retrieveAllFournisseurs();
 		int expected = fournisseurs.size();
-		Fournisseur o = new Fournisseur();
+		Fournisseur o = new Fournisseur(null, null, null, null, null, null);
 		o.setCode("code");
 		o.setLibelle("20");
 		Fournisseur savedFournisseur= fournisseurService.addFournisseur(o);
@@ -41,7 +41,7 @@ public class TestFournisseurJunit {
 
 	@Test
 	public void testUpdateFournisseur() {
-	Fournisseur o = new Fournisseur();
+	Fournisseur o = new Fournisseur(null, null, null, null, null, null);
 	o.setCode("code");
 	o.setLibelle("20");
 	Fournisseur savedFournisseur= fournisseurService.addFournisseur(o);
@@ -52,7 +52,7 @@ public class TestFournisseurJunit {
 	}
 		@Test
 		public void testRetrieveFournisseurs() {
-		Fournisseur o = new Fournisseur();
+		Fournisseur o = new Fournisseur(null, null, null, null, null, null);
 		o.setCode("code");
 		o.setLibelle("20");
 
@@ -75,7 +75,7 @@ public class TestFournisseurJunit {
 		//Testing deleteOperateur
 		@Test
 		public void testDeleteFournisseur() {
-			Fournisseur o = new Fournisseur();
+			Fournisseur o = new Fournisseur(null, null, null, null, null, null);
 			o.setCode("code");
 			o.setLibelle("20");
 		
@@ -89,7 +89,7 @@ public class TestFournisseurJunit {
 		@Test
 		
 		void assignSecteurActiviteToFournisseurTest() {
-			DetailFournisseur df= new DetailFournisseur();
+			DetailFournisseur df= new DetailFournisseur(null, null, null, null, null);
 			Fournisseur f=new Fournisseur( "code",  "libelle1", null, null,
         			null,df);
 			int expected = f.getSecteurActivites().size();

@@ -49,8 +49,8 @@ public class TestFournisseur {
 	@Test
 	void isFournisseurExistsById() {
 		
-		Fournisseur f=new Fournisseur();
-		DetailFournisseur df= new DetailFournisseur();
+		Fournisseur f=new Fournisseur(null, null, null, null, null, null);
+		DetailFournisseur df= new DetailFournisseur(null, null, null, null, f);
 				
 		df.setAdresse("adresse");
 		df.setEmail("email");
@@ -90,7 +90,7 @@ public class TestFournisseur {
 	 @Test
 	 void AddFournisseurTest() {
 		 
-		 Fournisseur f=new Fournisseur();	
+		 Fournisseur f=new Fournisseur(null, null, null, null, null, null);	
 		
 			f.setCode("code");
 			f.setLibelle("libelle");
@@ -102,7 +102,7 @@ public class TestFournisseur {
 	 
 	 @Test
 	 void DeleteFournisseurTest() {
-		 Fournisseur f=new Fournisseur();
+		 Fournisseur f=new Fournisseur(null, null, null, null, null, null);
 	 
 		 fournisseurService.deleteFournisseur(f.getIdFournisseur());
 			verify(fournisseurRepository).deleteById(f.getIdFournisseur());	

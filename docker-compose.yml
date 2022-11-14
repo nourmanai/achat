@@ -3,14 +3,18 @@ version: "2"
 services:
  mysqldb:
    image: mysql:5.7
-   restart: unless-stopped
+   container_name: db
+   restart: always
    environment:
-     - MYSQL_DATABASE=achatdb
+     - MYSQL_DATABASE: 'achatdb'
+     - MYSQL_ROOT_PASSWORD: ''
    ports:
-      - "4000:3306"
+      - "3306:3306"
    volumes:
       - db:/var/lib/mysql
  app:
+   image: nourmanai/imagedev
+   container_name: imagedev
    depends_on:
      - mysqldb
    build: .
@@ -26,7 +30,7 @@ services:
        "spring.jpa.hibernate.ddl-auto" : "update"}'
    stdin_open: true
    tty: true
-    
+   
     
  
 

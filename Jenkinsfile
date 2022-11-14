@@ -44,11 +44,11 @@ pipeline {
       }
     }
   
-/* stage('Nexus') {
+ stage('Nexus') {
 		 steps {
 			sh 'mvn deploy -DskipTests'
 			  }
-			  }*/
+			  }
   stage('building docker image')
         {
             steps

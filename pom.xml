@@ -120,13 +120,7 @@
 
 			</plugin>
 		</plugins>
-		<servers>
-        <server>
-            <id>maven-nexus-repo</id>
-            <username>yasminetlili</username>
-            <password>nexus</password>
-        </server>
-</servers>
+	
 
 	</build>
 

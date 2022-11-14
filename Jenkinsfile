@@ -1,11 +1,9 @@
 pipeline {
   agent any 
-   environment {
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "192.168.43.38:8081"
-        NEXUS_REPOSITORY = "maven-nexus-repo"
-        NEXUS_CREDENTIAL_ID = "nexus-user-credentials"
+      environment {
+        registry='mahdi988/spring'
+        registryCredential=''
+        dockerImage=''
     }
   stages {
     stage('git checkout') {
@@ -51,6 +49,40 @@ pipeline {
 			sh 'mvn deploy -DskipTests'
 			  }
 			  }
+  stage('building docker image')
+        {
+            steps
+            {
+                script
+                {
+                    dockerImage=docker.build registry+":$BUILD_NUMBER"
+                  // sh 'docker build -t wissembhk/project .'
+                }
+            }
+        }
+        stage("Login to DockerHub") {
+                steps{
+
+                    sh 'docker login -u mahdi988 -p Mahdi1234@'
+                }
+        }
+        stage('docker hub')
+         {
+             steps{
+                 script{
+                                      dockerImage.push()
+
+                 }
+             }
+         }
+       
+        
+        stage('image up')
+        {
+            steps{
+                sh 'docker-compose up -d'
+            }
+        }
     
   
  }

@@ -1,0 +1,120 @@
+pipeline {
+
+    agent any
+    
+    environment {
+        
+        DOCKERHUB_CREDENTIALS=credentials('credentialN')
+        registry = "nourmanai/achat"
+        registryCredential = 'credentialN'
+        dockerImage = ''
+    }
+  
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }        
+        stage('Checkout Git') {
+            steps {
+                echo 'pulling...';
+                git branch: 'nourmanai',
+                url:'https://github.com/nourmanai/achat.git';
+            }
+        }  
+         stage('MVN CLEAN') {
+            steps {
+                sh 'mvn clean'
+        }
+    }
+         stage('MVN COMPILE') {
+            steps {
+                sh 'mvn compile'
+        }
+    }
+         
+        stage('MVN SONARQUBE') {
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=123 -DskipTests'
+        }
+    }
+       
+        stage ("Launching unit tests"){
+			steps{
+			    echo 'Testing..'
+				sh "mvn test"
+			}
+		
+		}
+		 stage ("Deployement"){
+            steps{
+			    echo 'Deploying to Nexus'
+				sh """mvn clean package -DskipTests deploy:deploy-file -DgroupId=tn.esprit.rh -DartifactId=achat -Dversion=1.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://192.168.1.12:8081/repository/maven-releases/ -Dfile=target/achat-1.0.jar"""
+		}
+	}
+	
+    	
+        
+        stage('Build Image') {
+
+			steps {
+			    script{
+			        
+			        	sh 'docker  build -t nourmanai/imagedev:latest .'
+			    }
+			    }
+			}
+        
+        	stage('login') { 
+            steps { 
+                script { 
+
+                  sh ' echo $DOCKERHUB_CREDENTIALS_PSW |  docker login -u $DOCKERHUB_CREDENTIALS_USR --password 181jft2206'
+                }
+            } 
+        }
+        
+	
+		
+   
+        stage('Deploy our image') {
+                	steps {
+                    	script {
+                        	
+                        	sh 'docker push nourmanai/imagedev:latest'
+                    		}
+                	}
+            	    
+		}
+		
+		stage('docker-compose') {
+          steps {
+
+              sh "docker-compose up -d"
+          }
+        }
+		
+	     
+	   /*  stage('Cleaning up'){
+	         steps{
+	             
+	              sh "docker rmi nourmanai/imagedev:latest"
+	         }
+	     }*/
+	     
+    }	     
+	     post {
+            always{
+                archiveArtifacts artifacts: '*.csv', onlyIfSuccessful: true
+                
+                emailext to: "nour.manai@esprit.tn",
+                subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
+                body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
+                
+            cleanWs()
+            }
+        }
+   
+
+}

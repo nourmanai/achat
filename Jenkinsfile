@@ -1,9 +1,18 @@
 pipeline {
   agent any 
       environment {
+	 EMAIL_TO = 'ayadimahdi04@gmail.com'
         registry='mahdi988/spring'
         registryCredential=''
         dockerImage=''
+    }
+	post{
+         failure {
+            emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+                    to: "${EMAIL_TO}", 
+                    subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+        }
+        
     }
   stages {
     stage('git checkout') {

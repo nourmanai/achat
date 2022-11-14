@@ -22,7 +22,7 @@ pipeline {
          stage("building") {
             steps {
                 script {
-                   sh 'mvn -B -DskipTests clean package'
+                   sh 'mvn -B -DskipTests package'
                 }
             }
          }
@@ -77,6 +77,7 @@ pipeline {
                 }
             }
          }
+		 
      
  }
    

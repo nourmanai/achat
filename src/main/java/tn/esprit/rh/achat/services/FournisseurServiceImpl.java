@@ -47,7 +47,7 @@ public class FournisseurServiceImpl implements IFournisseurService {
 
 
 	public Fournisseur addFournisseur(Fournisseur f /*Master*/) {
-		DetailFournisseur df= new DetailFournisseur();//Slave
+		DetailFournisseur df= new DetailFournisseur(null, null, null, null, f);//Slave
 		df.setDateDebutCollaboration(new Date()); 
 		//util
 		//On affecte le "Slave" au "Master"

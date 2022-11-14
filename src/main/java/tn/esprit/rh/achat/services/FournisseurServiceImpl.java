@@ -1,6 +1,7 @@
 package tn.esprit.rh.achat.services;
 
 import lombok.extern.slf4j.Slf4j;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.rh.achat.entities.DetailFournisseur;
@@ -31,15 +32,24 @@ public class FournisseurServiceImpl implements IFournisseurService {
 	public List<Fournisseur> retrieveAllFournisseurs() {
 		List<Fournisseur> fournisseurs = (List<Fournisseur>) fournisseurRepository.findAll();
 		for (Fournisseur fournisseur : fournisseurs) {
-			log.info(" fournisseur : " + fournisseur);
+		//	log.info(" fournisseur : " + fournisseur);
 		}
 		return fournisseurs;
 	}
+	
+	  public  FournisseurServiceImpl(FournisseurRepository repo)
+	    {
+	        // this keyword refers to current instance
+	        this.fournisseurRepository = repo;
+	    }
+	  
+	 
 
 
 	public Fournisseur addFournisseur(Fournisseur f /*Master*/) {
 		DetailFournisseur df= new DetailFournisseur();//Slave
-		df.setDateDebutCollaboration(new Date()); //util
+		df.setDateDebutCollaboration(new Date()); 
+		//util
 		//On affecte le "Slave" au "Master"
 		f.setDetailFournisseur(df);	
 		fournisseurRepository.save(f);

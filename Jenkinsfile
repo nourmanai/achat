@@ -17,7 +17,7 @@ pipeline {
   stages {
     stage('git checkout') {
       steps {
-        git branch : 'MahdiAyadi',
+        git branch : 'MahdiAyadii',
         url: 'https://github.com/nourmanai/achat.git',
         credentialsId: '34978384-1ef1-4c5e-acc9-ef928a954625';
         echo 'checkout stage'

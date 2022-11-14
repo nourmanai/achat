@@ -8,7 +8,10 @@ pipeline {
   stages {
     stage('git checkout') {
       steps {
-        checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/wissembhk/devopsSpring']]])
+        git branch : 'MahdiAyadi',
+        url: 'https://github.com/nourmanai/achat.git',
+        credentialsId: '34978384-1ef1-4c5e-acc9-ef928a954625';
+        echo 'checkout stage'
            }
   }
     
@@ -41,11 +44,11 @@ pipeline {
       }
     }
   
- stage('Nexus') {
+/* stage('Nexus') {
 		 steps {
 			sh 'mvn deploy -DskipTests'
 			  }
-			  }
+			  }*/
   stage('building docker image')
         {
             steps

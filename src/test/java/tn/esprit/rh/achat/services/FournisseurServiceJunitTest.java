@@ -51,7 +51,7 @@ public class FournisseurServiceJunitTest {
         Fournisseur f2 = fs.addFournisseur(fournisseur1);
         assertEquals(2, fs.retrieveAllFournisseurs().size());
 		fs.deleteFournisseur(f.getIdFournisseur());
-		fs.deleteFournisseur(f2.getIdFournisseur());
+		
         
 	}
 	

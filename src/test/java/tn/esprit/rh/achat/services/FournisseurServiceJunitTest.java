@@ -52,7 +52,6 @@ public class FournisseurServiceJunitTest {
         assertEquals(2, fs.retrieveAllFournisseurs().size());
 		fs.deleteFournisseur(f.getIdFournisseur());
 		
-        
 	}
 	
   

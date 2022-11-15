@@ -1,34 +1,41 @@
-version: "2"
-
+version: '3'
 services:
- mysqldb:
-   image: mysql:5.7
-   restart: always
-   environment:
-     - MYSQL_DATABASE= achatdb
-   ports:
-      - "3306:3306"
-   volumes:
-      - db:/var/lib/mysql
- app:
-   depends_on:
-     - mysqldb
-   build: .
-   restart: always
-   ports:
-     - "8089:8089"
-   environment:
-     SPRING_APPLICATION_JSON: '{
-       "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/achatdb?useSSL=false",
-       "spring.datasource.username" : "root",
-       "spring.datasource.password" : "",
-       "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
-       "spring.jpa.hibernate.ddl-auto" : "update"}'
-   stdin_open: true
-   tty: true
-    
-    
  
+ mysqldb:
+  image: mysql
+  container_name: db
+  restart: always
+  environment:
+   MYSQL_DATABASE: 'achatdb'
+   MYSQL_ROOT_PASSWORD: ''
+  ports:
+   - '3306:3306'
+  volumes:
+   - db:/var/lib/mysql
+ phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  restart: unless-stopped
+  environment:
+   PMA_ARBITRARY: 1
+   PMA_HOST: mysqldb
+  depends_on:
+  - mysqldb
+  ports:
+   - '8068:81'
+ spring_app:
+  image: nourmanai/achat
+  container_name: imagedev
+  restart: on-failure
+  ports:
+   - 8089:8089
+  depends_on:
+   - mysqldb
+  volumes:
+   - achat_cache:/achatapp-cache
+
+
 
 volumes:
+
  db:
+ achat_cache:

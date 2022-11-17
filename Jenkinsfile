@@ -15,7 +15,7 @@ pipeline {
          stage("cleaning code") {
             steps {
                 script {
-                   sh 'mvn -B -DskipTests clean '
+                   sh 'mvn -B -DskipTests clean'
                 }
             }
         }
@@ -36,7 +36,7 @@ pipeline {
         stage("code QualityCheck Sonar") {
             steps {
                 script {
-             sh " mvn sonar:sonar -Dsonar.projectKey=anis -Dsonar.host.url=http://192.168.250.205:9000   -Dsonar.login=b7a1aeb30ea7455271629bb919ba14f7dd7ce678"
+             sh " mvn sonar:sonar -Dsonar.projectKey=anis -Dsonar.host.url=http://192.168.100.10:9000   -Dsonar.login=b7a1aeb30ea7455271629bb919ba14f7dd7ce678"
 
                 }
             }
